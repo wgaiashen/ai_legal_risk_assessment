@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Legal Risk Assessment Results{% endblock %}
+
+{% block content %}
+<div class="results-container">
+    <!-- Summary Overview Section -->
+    <div class="summary-overview">
+        <h1 class="results-title">Legal Risk Assessment Summary</h1>
+        <div class="summary-card">
+            <div class="summary-score">
+                <h2>Total Score:</h2>
+                <p class="score-value {{ final_assessment | lower | replace(' ', '-') }}">{{ total_score }}/100</p>
+            </div>
+            <div class="summary-risk">
+                <h2>Final Risk Level:</h2>
+                <p class="risk-value {{ final_assessment | lower | replace(' ', '-') }}">{{ final_assessment }}</p>
+            </div>
+        </div>
+        <div class="summary-explanation">
+            <h2>Overview</h2>
+            <p>{{ summary['AI_tool_description'] }}</p>
+            <div class="details">
+                <div>
+                    <h3>Reason for Risk Level:</h3>
+                    <p>{{ summary['risk_level_why'] }}</p>
+                </div>
+                <div>
+                    <h3>Recommendations:</h3>
+                    <p>{{ summary['recommendations'] }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Breakdown Section -->
+    <section class="breakdown-section">
+        <h2>Detailed Risk Breakdown</h2>
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>Risk Factor</th>
+                    <th>Risk Level</th>
+                    <th>Explanation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for factor, details in parsed_results.items() %}
+                {% if factor != 'clarifying_questions' and factor != 'history' %}
+                <tr class="risk-level-{{ details.risk_level | lower | replace(' ', '-') }}">
+                    <td class="bold">{{ factor.replace('_', ' ') }}</td>
+                    <td class="risk-level-{{ details.risk_level | lower | replace(' ', '-') }} bold">
+                        {{ details.risk_level | capitalize }}
+                    </td>
+                    <td>{{ details.justification }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</div>
+{% endblock %}

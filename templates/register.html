@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="register-container">
+    <h2>Register</h2>
+    <form method="POST" id="register-form" onsubmit="return validatePassword()">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br>
+
+        <div id="password-errors" class="hidden"></div>
+
+        <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function validatePassword() {
+            const password = document.querySelector('input[name="password"]').value;
+            const errors = [];
+
+            if (password.length < 8) errors.push("At least 8 characters required.");
+            if (!/[A-Z]/.test(password)) errors.push("At least one uppercase letter required.");
+            if (!/[a-z]/.test(password)) errors.push("At least one lowercase letter required.");
+            if (!/\d/.test(password)) errors.push("At least one number required.");
+            if (!/[!@#$%^&*(),.?\":{}|<>]/.test(password)) errors.push("At least one special character required.");
+
+            const errorContainer = document.getElementById('password-errors');
+            errorContainer.innerHTML = ''; 
+
+            if (errors.length > 0) {
+                errors.forEach(error => {
+                    const li = document.createElement('li');
+                    li.textContent = error;
+                    errorContainer.appendChild(li);
+                });
+                return false; 
+            }
+
+            return true; 
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Risk Assessment Tool{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero modern">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to the Legal Risk Assessment Tool</h1>
+                <p class="hero-subtitle">Streamline your approach to managing AI-related legal risks with clarity and precision.</p>
+                <div class="cta-buttons">
+                    <a href="/assessment" class="btn btn-primary">Start Assessment</a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about modern">
+        <div class="container">
+            <h2 class="section-title">About the Legal Risk Assessment Tool</h2>
+            <p class="section-text">Navigating the complexities of deploying AI products is easier with this tool. Evaluate risks, ensure compliance, and gain insights to make informed decisions.</p>
+            <div class="about-grid">
+                <div class="about-item">
+                    <h3>How It Works</h3>
+                    <ul class="about-list">
+                        <li><strong>Submit Details:</strong> Share a description of the AI product you want to use.</li>
+                        <li><strong>Interactive Dialogue:</strong> Engage in a tailored risk assessment conversation.</li>
+                        <li><strong>Receive Insights:</strong> Obtain a detailed report with a risk score and actionable recommendations.</li>
+                    </ul>
+                </div>
+                <div class="about-item">
+                    <h3>Why Use This?</h3>
+                    <ul class="about-list">
+                        <li><strong>Comprehensive Analysis:</strong> Covering 10 key risk factors.</li>
+                        <li><strong>Dynamic Interaction:</strong> AI-driven clarifications for accurate results.</li>
+                        <li><strong>Actionable Outputs:</strong> Clear and concise risk mitigation strategies.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Start Now Section -->
+    <section class="cta modern">
+        <div class="container">
+            <h2 class="cta-title">Ready to assess your AI product?</h2>
+            <a href="/assessment" class="btn btn-primary">Start Now</a>
+        </div>
+    </section>
+{% endblock %}

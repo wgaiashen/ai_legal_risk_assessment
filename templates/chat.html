@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}Risk Assessment Chat{% endblock %}
+
+{% block content %}
+<h1 class="chat-title">Risk Assessment Chat</h1>
+<div class="chat-container">
+    <div id="chat-box">
+        <div class="chat-message bot-message">Hello! Please describe the AI product you want to use, and I'll help you assess the risks.</div>
+    </div>
+    <div class="chat-input-container">
+        <input type="text" id="user-input" placeholder="Type your response here..." />
+        <button id="send-btn">Send</button>
+    </div>
+    <div id="loading-bar-container" class="hidden">
+        <p>Generating results...</p>
+        <div id="loading-bar"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const chatBox = document.getElementById('chat-box');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const loadingBarContainer = document.getElementById('loading-bar-container');
+    let isFollowUp = false;
+    let conversationHistory = [];
+
+    async function handleSend() {
+        const userText = userInput.value.trim();
+        if (userText === '') return;
+
+        chatBox.innerHTML += `<div class="chat-message user-message">${userText}</div>`;
+        userInput.value = '';
+        conversationHistory.push({ role: "user", content: userText });
+
+        loadingBarContainer.classList.remove('hidden');
+
+        try {
+            const response = await fetch('/analyze', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    description: userText,
+                    is_follow_up: isFollowUp,
+                    history: conversationHistory
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.error) {
+                chatBox.innerHTML += `<div class="chat-message bot-message error">${data.error}</div>`;
+            } else if (data.redirect_url) {
+                window.location.href = data.redirect_url;
+                return;
+            } else if (data.clarifying_questions && data.clarifying_questions.length > 0) {
+                const questionsHtml = data.clarifying_questions
+                    .map(question => {
+                        conversationHistory.push({ role: "assistant", content: question });
+                        return `<div class="chat-message bot-message">${question}</div>`;
+                    })
+                    .join('');
+                chatBox.innerHTML += questionsHtml;
+                isFollowUp = true;
+            }
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+        } catch (error) {
+            chatBox.innerHTML += `<div class="chat-message bot-message error">An error occurred: ${error}</div>`;
+        } finally {
+            loadingBarContainer.classList.add('hidden');
+        }
+    }
+
+    sendBtn.addEventListener('click', handleSend);
+
+    userInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            handleSend();
+        }
+    });
+</script>
+{% endblock %}
