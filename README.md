@@ -1,8 +1,6 @@
 # Legal Risk Assessment Tool: 
 ## _Using AI to Assess AI_
 
-### Video Demo: see [here](https://youtu.be/-esWFN2BpFo).
-
 ### Table of Contents
 - [Overview](#overview)
 - [Key features](#key-features)
