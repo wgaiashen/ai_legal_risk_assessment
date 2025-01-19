@@ -119,7 +119,7 @@ Once running:
 - **Add unit tests.** 
 
 ## Background
-Over the last several years as a technology lawyer , I have been helping clients navigate the risks of deploying machine learning systems in their organisations – whether to boost productivity internally or to supplement their product offering externally. Most of these engagements follow a familiar pattern: collecting relevant inputs (i.e. the client’s description of the AI tool they are proposing to use), conducting structured assessments of the legal risks involved, and producing actionable recommendations for mitigating such risks. This project is my attempt at doing so.
+Over the last several years as a technology lawyer, I have been helping clients navigate the risks of deploying machine learning systems in their organisations – whether to boost productivity internally or to supplement their product offering externally. Most of these engagements follow a familiar pattern: collecting relevant inputs (i.e. the client’s description of the AI tool they are proposing to use), conducting structured assessments of the legal risks involved, and producing actionable recommendations for mitigating such risks. This project is my attempt at doing so.
 
 ## Acknowledgments
 This project was built as the final submission to the HarvardX [CS50x 2024](https://cs50.harvard.edu/x/2024/) course. 
