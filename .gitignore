@@ -1,0 +1,5 @@
+alra_env/
+__pycache__/
+constants.py
+.DS_Store
+risk_assessment.db
