@@ -16,7 +16,7 @@
 - [Acknowledgments](#acknowledgments)
 
 ## Overview
-This project is my CS50 final project. The purpose of this project is to _use_ AI to provide a legal risk assessment _of_ an AI product. 
+The purpose of this project is to _use_ AI to provide a legal risk assessment _of_ an AI product. 
 
 Lawyers regularly advise clients on the legal risks associated with deploying an AI-enabled tool, product or service ("AI product") within their organisation or externally to customers. This tool seeks to automate this process to help clients assess the legal risks of AI products they are proposing to deploy. 
 
